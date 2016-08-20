@@ -1,6 +1,6 @@
 # bip
 
-Lightweight image processing library
+Lightweight image processing library.
 
 Dependency-free collection of basic image processing routines in C. 
 
@@ -15,7 +15,7 @@ Dependency-free collection of basic image processing routines in C.
 * Gaussian Blur.
 * Pyramid down / up sampling.
 * Median filter.
-* Local Binary Pattern 
+* Local Binary Pattern. 
 
 ## License:
 

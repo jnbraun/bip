@@ -1,5 +1,7 @@
 # bip
 
+[![Build Status](https://travis-ci.org/jnbraun/bip.svg?branch=master)](https://travis-ci.org/jnbraun/bip/)
+
 Lightweight image processing library.
 
 Dependency-free collection of basic image processing routines in C. 

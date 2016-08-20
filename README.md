@@ -1,12 +1,13 @@
 # bip
+
 Lightweight image processing library
 
 Dependency-free collection of basic image processing routines in C. 
+
 [stb_image] (https://github.com/nothings/stb) may be optionally used to read/write image on disk.
 
 
-Features:
----------
+## Features:
 
 * Image manipulation: rotation / resize / distortion / crop / contrast stretch / brightness ...
 * Integral Image.
@@ -16,6 +17,6 @@ Features:
 * Median filter.
 * Local Binary Pattern 
 
-License:.
---------
-MIT
+## License:
+
+Released under MIT license.

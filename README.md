@@ -14,10 +14,10 @@ Dependency-free collection of basic image processing routines in C.
 
 * Image manipulation: rotation / resize / distortion / crop / contrast stretch / brightness ...
 * Integral Image.
+* Image histogram.
 * Otsu thresholding.
-* Gaussian Blur.
+* Filtering: Gaussian Blur / Sobel / Median.
 * Pyramid down / up sampling.
-* Median filter.
 * Local Binary Pattern. 
 
 ## License:

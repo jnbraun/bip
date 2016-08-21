@@ -19,6 +19,7 @@ Dependency-free collection of basic image processing routines in C.
 * Filtering: Gaussian Blur / Sobel / Median.
 * Pyramid down / up sampling.
 * Local Binary Pattern. 
+* Bunny
 
 ## License:
 

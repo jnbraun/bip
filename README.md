@@ -1,6 +1,7 @@
 # bip
 
 [![Build Status](https://travis-ci.org/jnbraun/bip.svg?branch=master)](https://travis-ci.org/jnbraun/bip/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Lightweight image processing library.
 

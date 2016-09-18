@@ -1550,6 +1550,21 @@ bip_status bip_write_image(char *filename, uint8_t *src, int32_t src_width, int3
 	return BIP_SUCCESS;
 }
 
+bip_status bip_write_image_to_memory(unsigned char **buffer, int32_t *buffer_size,
+	uint8_t *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride)
+{
+	unsigned char *p_buf = NULL;
+	int sz = 0;
+
+	bh_assert_valid_ptr(src, BIP_INVALID_PTR);
+
+	p_buf = stbi_write_png_to_mem(src, src_stride, src_width, src_height, src_depth, &sz);
+	*buffer_size = sz;
+	*buffer = p_buf;
+
+	return BIP_SUCCESS;
+}
+
 bip_status bip_write_float_image(char *filename, float *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride)
 {
 	int32_t x, y;

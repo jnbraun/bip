@@ -518,6 +518,20 @@ bip_status bip_load_image(char *filename, uint8_t **src, int32_t *src_width, int
 bip_status bip_write_image(char *filename, uint8_t *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride);
 
 /**
+* \brief Write image to memory buffer.
+*
+* \param	buffer				Pointer to output buffer.
+* \param	buffer_size			Size of output buffer.
+* \param	src					Pointer to image.
+* \param	src_width			Image width.
+* \param	src_height			Image height.
+* \param	src_depth			Image depth.
+* \param	src_stride			Image row size in bytes.
+*/
+bip_status bip_write_image_to_memory(unsigned char **buffer, int32_t *buffer_size,
+	uint8_t *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride);
+
+/**
 * \brief Write image (as a float array) on disk.
 *
 * \param	filename			Image file path.

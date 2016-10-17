@@ -1543,6 +1543,21 @@ bip_status bip_load_image(char *filename, uint8_t **src, int32_t *src_width, int
 	return BIP_SUCCESS;
 }
 
+bip_status bip_load_image_from_memory(unsigned char *buffer, int buffer_size, uint8_t **src, int32_t *src_width, int32_t *src_height, int32_t *src_depth)
+{
+	int w, h, c;
+	unsigned char *val = stbi_load_from_memory(buffer, buffer_size, &w, &h, &c, 0);
+	 if (!val) {
+        fprintf(stderr, "[ERROR] Cannot load image from buffer\nSTB error: %s\n", stbi_failure_reason());
+        return BIP_UNKNOWN_ERROR;
+    }
+	*src = val;
+	*src_width = w;
+	*src_height = h;
+	*src_depth = c;
+	return BIP_SUCCESS;
+}
+
 bip_status bip_write_image(char *filename, uint8_t *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride)
 {
 	bh_assert_valid_ptr(src, BIP_INVALID_PTR);

@@ -506,6 +506,18 @@ bip_status bip_lbp_histogram_features(uint8_t *src, size_t src_width, size_t src
 bip_status bip_load_image(char *filename, uint8_t **src, int32_t *src_width, int32_t *src_height, int32_t *src_depth);
 
 /**
+* \brief Load image from memory.
+*
+* \param	buffer				Pointer to image buffer.
+* \param	buffer_size			Image buffer size.
+* \param	src					Pointer to loaded image.
+* \param	src_width			Image width.
+* \param	src_height			Image height.
+* \param	src_depth			Image depth.
+*/
+bip_status bip_load_image_from_memory(unsigned char *buffer, int buffer_size, uint8_t **src, int32_t *src_width, int32_t *src_height, int32_t *src_depth);
+
+/**
 * \brief Write image on disk.
 *
 * \param	filename			Image file path.

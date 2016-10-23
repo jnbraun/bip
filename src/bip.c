@@ -952,7 +952,7 @@ bip_status bip_resize_bilinear(uint8_t *src, size_t src_width, size_t src_height
             alpha = 1;
         }
 
-        table_iy[i] = (int32_t)(depth * index);
+        table_iy[i] = (int32_t)(index);
         table_ay[i] = (int32_t)(alpha * FRACTION_RANGE + 0.5);
     }
 

@@ -1589,8 +1589,46 @@ bip_status bip_write_float_image(char *filename, float *src, int32_t src_width, 
 
 	src_stride /= sizeof(float);
 	for (y = 0; y < src_height; ++y) {
-		for (x = 0; x < src_width; ++x)
+		for (x = 0; x < src_width * src_depth; ++x)
 			buffer[x] = (uint8_t)bh_clamp(255.0f * src[x], 0, 255);
+		buffer += src_width * src_depth;
+		src += src_stride;
+	}
+	buffer -= src_width * src_height * src_depth;
+	if (stbi_write_png(filename, src_width, src_height, src_depth, buffer, src_stride) != 1) {
+		fprintf(stderr, "[ERROR] Failed to write image %s\n", filename);
+		return -1;
+	}
+	bh_free(buffer);
+	return BIP_SUCCESS;
+}
+
+bip_status bip_write_float_image_norm(char *filename, float *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride)
+{
+	int32_t x, y;
+	uint8_t *buffer = (uint8_t *)calloc(src_width * src_height * src_depth, sizeof(uint8_t));
+	float min_src, max_src, norm;
+	
+	bh_assert_valid_ptr(src, BIP_INVALID_PTR);
+	min_src = src[0];
+	max_src = src[0];
+	
+	src_stride /= sizeof(float);
+	for (y = 0; y < src_height; ++y) {
+		for (x = 0; x < src_width; ++x) {
+			min_src = bh_min(min_src, src[x]);
+			max_src = bh_max(max_src, src[x]);
+		}
+		src += src_stride;
+	}
+	src -= src_stride * src_height;
+	if (max_src - min_src > 0)
+		norm = 255.0f / (max_src - min_src);
+	else
+		norm = 0.0f;
+	for (y = 0; y < src_height; ++y) {
+		for (x = 0; x < src_width * src_depth; ++x)
+			buffer[x] = (uint8_t)bh_clamp(norm * (src[x] - min_src), 0, 255);
 		buffer += src_width * src_depth;
 		src += src_stride;
 	}

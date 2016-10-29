@@ -555,6 +555,8 @@ bip_status bip_write_image_to_memory(unsigned char **buffer, int32_t *buffer_siz
 */
 bip_status bip_write_float_image(char *filename, float *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride);
 
+bip_status bip_write_float_image_norm(char *filename, float *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride);
+
 /**
 * \brief Write image (as a double array) on disk.
 *

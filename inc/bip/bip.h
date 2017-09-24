@@ -447,6 +447,19 @@ bip_status bip_invert_image(uint8_t *src, size_t width, size_t height, size_t de
 				uint8_t *dst, size_t dst_stride);
 
 /**
+* \brief Horizontal flip image.
+*
+* \param	src				Pointer to input image.
+* \param	width			Image width.
+* \param	height			Image height.
+* \param	depth			Image depth.
+* \param	src_stride		Input image row size in bytes.
+* \param	dst				Pointer to output image.
+*/
+bip_status bip_fliph_image(uint8_t *src, size_t width, size_t height, size_t depth, size_t src_stride,
+	uint8_t *dst, size_t dst_stride);
+
+/**
  * \brief Convert from unsigned char to float image.
  *
  * \param	src				Pointer to input unsigned char image.

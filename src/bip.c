@@ -1115,6 +1115,25 @@ bip_status bip_invert_image(uint8_t *src, size_t width, size_t height, size_t de
 	return BIP_SUCCESS;
 }
 
+
+bip_status bip_fliph_image(uint8_t *src, size_t width, size_t height, size_t depth, size_t src_stride, 
+	uint8_t *dst, size_t dst_stride)
+{
+	size_t x, y, c;
+
+	for (y = 0; y < height; ++y) {
+		for (x = 0; x < width; ++x) {
+			for (c = 0; c < depth; ++c) {
+				dst[x * depth + c] = src[(width - x) * depth + c]; 
+			}
+		}
+		src += src_stride;
+		dst += dst_stride;
+	}
+
+	return BIP_SUCCESS;
+}
+
 bip_status bip_convert_u8_to_f32(uint8_t *src, size_t width, size_t height, size_t depth, size_t src_stride, float *dst)
 {
 	size_t x, y;

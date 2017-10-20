@@ -1124,7 +1124,7 @@ bip_status bip_fliph_image(uint8_t *src, size_t width, size_t height, size_t dep
 	for (y = 0; y < height; ++y) {
 		for (x = 0; x < width; ++x) {
 			for (c = 0; c < depth; ++c) {
-				dst[x * depth + c] = src[(width - x) * depth + c]; 
+				dst[x * depth + c] = src[(width - 1 - x) * depth + c]; 
 			}
 		}
 		src += src_stride;

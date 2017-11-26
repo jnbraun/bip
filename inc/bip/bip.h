@@ -83,502 +83,502 @@ typedef unsigned __int64  uint64_t;
 #define bip_deg2rad(x) (x) * 0.01745329252f
 
 /**
- * \brief Enum function returned status.
+ * \brief   Enum function returned status.
  */
 typedef enum {			
-	BIP_SUCCESS,
-	BIP_INVALID_PTR,
-	BIP_INVALID_SIZE,
-	BIP_INVALID_PARAMETER,
-	BIP_UNKNOWN_ERROR
+    BIP_SUCCESS,
+    BIP_INVALID_PTR,
+    BIP_INVALID_SIZE,
+    BIP_INVALID_PARAMETER,
+    BIP_UNKNOWN_ERROR
 } bip_status;
 
 /**
- * \brief Enum interpolation methods.
+ * \brief   Enum interpolation methods.
  */
 typedef enum {
-	NEAREST_NEIGHBOR,
-	BILINEAR
+    NEAREST_NEIGHBOR,
+    BILINEAR
 } bip_interpolation;
 
 
 const char* bip_status_string(bip_status status);
 
-#define bip_check(err) {														\
-	if ((err) != BIP_SUCCESS) {													\
-		fprintf(stderr, "[ERROR] %s\n", bip_status_string(err));				\
-		return err;																\
-	}																			\
+#define bip_check(err) {                                                        \
+    if ((err) != BIP_SUCCESS) {                                                 \
+        fprintf(stderr, "[ERROR] %s\n", bip_status_string(err));                \
+        return err;                                                             \
+    }                                                                           \
 }
 
 /**
- * \brief Convert a rgb image into a gray image.
+ * \brief   Convert a rgb image into a gray image.
  *
- * \param	src				Pointer to input image.
- * \param	width			Input image width.
- * \param	height			Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image (may be the input image).
- * \param	dst_stride		Output image row size in bytes.
+ * \param   src             Pointer to input image.
+ * \param   width           Input image width.
+ * \param   height          Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image (may be the input image).
+ * \param   dst_stride      Output image row size in bytes.
  */
 bip_status bip_rgb2gray(uint8_t *src, size_t width, size_t height, size_t src_stride, uint8_t *dst, size_t dst_stride);
 
 /**
- * \brief Apply linear stretch to the contrast of an image.
+ * \brief   Apply linear stretch to the contrast of an image.
  *  For each pixel, apply a linear stretch to the difference of the current pixel intensity and the image mean intensity:
- *		dst[i] = contrast * (src[i] - mean) + mean;
+ *      dst[i] = contrast * (src[i] - mean) + mean;
  *
- * \param	src				Pointer to input image.
- * \param	src_stride		Input image row size in bytes.
- * \param	width			Input image width.
- * \param	height			Input image height.
- * \param	depth			Input image depth.
- * \param	dst				Pointer to output image (may be the input image).
- * \param	dst_stride		Output image row size in bytes.
- * \param	contrast		Stretch coefficient to be applied.
+ * \param   src             Pointer to input image.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   width           Input image width.
+ * \param   height          Input image height.
+ * \param   depth           Input image depth.
+ * \param   dst             Pointer to output image (may be the input image).
+ * \param   dst_stride      Output image row size in bytes.
+ * \param   contrast        Stretch coefficient to be applied.
  */
 bip_status bip_contrast_stretch(uint8_t *src, size_t src_stride, size_t width, size_t height, size_t depth,
-				uint8_t *dst, size_t dst_stride, float contrast);
+                uint8_t *dst, size_t dst_stride, float contrast);
 
 /**
- * \brief Apply additive factor to the brightness of an image.
+ * \brief   Apply additive factor to the brightness of an image.
  *  For each pixel, apply a linear stretch to the difference of the current pixel intensity and the image mean intensity:
- *		dst[i] = src[i] + bightness;
+ *      dst[i] = src[i] + bightness;
  *
- * \param	src				Pointer to input image.
- * \param	src_stride		Input image row size in bytes.
- * \param	width			Input image width.
- * \param	height			Input image height.
- * \param	depth			Input image depth.
- * \param	dst				Pointer to output image (may be the input image).
- * \param	dst_stride		Output image row size in bytes.
- * \param	contrast		Stretch coefficient to be applied.
+ * \param   src             Pointer to input image.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   width           Input image width.
+ * \param   height          Input image height.
+ * \param   depth           Input image depth.
+ * \param   dst             Pointer to output image (may be the input image).
+ * \param   dst_stride      Output image row size in bytes.
+ * \param   contrast        Stretch coefficient to be applied.
  */
 bip_status bip_image_brightness(uint8_t *src, size_t src_stride, size_t width, size_t height, size_t depth,
-					uint8_t *dst, size_t dst_stride, int32_t brightness);
+                    uint8_t *dst, size_t dst_stride, int32_t brightness);
 
 /**
- * \brief Distort an image with random distortion map generated by Perlin noise.
+ * \brief   Distort an image with random distortion map generated by Perlin noise.
  *
- * \param	src				Pointer to input image.
- * \param	src_stride		Input image row size in bytes.
- * \param	width			Input image width.
- * \param	height			Input image height.
- * \param	depth			Input image depth.
- * \param	dst				Pointer to output image (may be the input image).
- * \param	dst_stride		Output image row size in bytes.
- * \param	distortion		Distortion coefficient.
- * \param	kx				Seed x-coordinate.
- * \param	ky				Seed y-coordinate.
+ * \param   src             Pointer to input image.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   width           Input image width.
+ * \param   height          Input image height.
+ * \param   depth           Input image depth.
+ * \param   dst             Pointer to output image (may be the input image).
+ * \param   dst_stride      Output image row size in bytes.
+ * \param   distortion      Distortion coefficient.
+ * \param   kx              Seed x-coordinate.
+ * \param   ky              Seed y-coordinate.
  */
 bip_status bip_image_perlin_distortion(uint8_t *src, size_t src_stride, size_t width, size_t height, size_t depth,
-					uint8_t *dst, size_t dst_stride, float distortion, float kx, float ky);
+                    uint8_t *dst, size_t dst_stride, float distortion, float kx, float ky);
 
 /**
- * \brief Mirror the borders of an image given an canvas.
+ * \brief   Mirror the borders of an image given an canvas.
  *
- * \param	src				Pointer to input image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_depth		Input image depth.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_width		Output cropped image width.
- * \param	dst_height		Output cropped image height.
- * \param	dst_depth		Output cropped image depth.
- * \param	top				Number of top rows to be mirrored.
- * \param	bottom			Number of bottom rows to be mirrored.
- * \param	left			Number of left columns to be mirrored.
- * \param	right			Number of right columns to be mirrored.
+ * \param   src             Pointer to input image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_depth       Input image depth.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_width       Output cropped image width.
+ * \param   dst_height      Output cropped image height.
+ * \param   dst_depth       Output cropped image depth.
+ * \param   top             Number of top rows to be mirrored.
+ * \param   bottom          Number of bottom rows to be mirrored.
+ * \param   left            Number of left columns to be mirrored.
+ * \param   right           Number of right columns to be mirrored.
  */
 bip_status bip_mirror_borders_8u(uint8_t *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride,
-					uint8_t *dst, int32_t dst_width, int32_t dst_height, int32_t dst_depth, int32_t dst_stride,
-					int32_t top, int32_t bottom, int32_t left, int32_t right);
+                    uint8_t *dst, int32_t dst_width, int32_t dst_height, int32_t dst_depth, int32_t dst_stride,
+                    int32_t top, int32_t bottom, int32_t left, int32_t right);
 
 /**
- * \brief Mirror the borders of a float image given an canvas.
+ * \brief   Mirror the borders of a float image given an canvas.
  *
- * \param	src				Pointer to input image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_depth		Input image depth.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_width		Output cropped image width.
- * \param	dst_height		Output cropped image height.
- * \param	dst_depth		Output cropped image depth.
- * \param	dst_stride		Output cropped image row size in bytes.
- * \param	top				Number of top rows to be mirrored.
- * \param	bottom			Number of bottom rows to be mirrored.
- * \param	left			Number of left columns to be mirrored.
- * \param	right			Number of right columns to be mirrored.
+ * \param   src             Pointer to input image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_depth       Input image depth.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_width       Output cropped image width.
+ * \param   dst_height      Output cropped image height.
+ * \param   dst_depth       Output cropped image depth.
+ * \param   dst_stride      Output cropped image row size in bytes.
+ * \param   top             Number of top rows to be mirrored.
+ * \param   bottom          Number of bottom rows to be mirrored.
+ * \param   left            Number of left columns to be mirrored.
+ * \param   right           Number of right columns to be mirrored.
  */
 bip_status bip_mirror_borders_32f(float *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride,
-					float *dst, int32_t dst_width, int32_t dst_height, int32_t dst_depth, int32_t dst_stride,
-					int32_t top, int32_t bottom, int32_t left, int32_t right);
+                    float *dst, int32_t dst_width, int32_t dst_height, int32_t dst_depth, int32_t dst_stride,
+                    int32_t top, int32_t bottom, int32_t left, int32_t right);
 
 /**
- * \brief Crop an image.
+ * \brief   Crop an image.
  *
- * \param	src				Pointer to input image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	x_ul			Upper-left corner x-coordinate of the crop.
- * \param	y_ul			Upper-left corner y-coordinate of the crop.
- * \param	dst				Pointer to output cropped image.
- * \param	dst_width		Output cropped image width.
- * \param	dst_height		Output cropped image height.
- * \param	dst_stride		Output cropped image row size in bytes.
- * \param	dst_depth		Output cropped image depth.
+ * \param   src             Pointer to input image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   x_ul            Upper-left corner x-coordinate of the crop.
+ * \param   y_ul            Upper-left corner y-coordinate of the crop.
+ * \param   dst             Pointer to output cropped image.
+ * \param   dst_width       Output cropped image width.
+ * \param   dst_height      Output cropped image height.
+ * \param   dst_stride      Output cropped image row size in bytes.
+ * \param   dst_depth       Output cropped image depth.
  */
 bip_status bip_crop_image(uint8_t *src, size_t src_width, size_t src_height, size_t src_stride, int32_t x_ul, int32_t y_ul,
-				uint8_t *dst, size_t dst_width, size_t dst_height, size_t dst_stride, size_t depth);
+                uint8_t *dst, size_t dst_width, size_t dst_height, size_t dst_stride, size_t depth);
 
 /**
- * \brief Computes the sum integral of an image.
+ * \brief   Computes the sum integral of an image.
  *
- * \param	src				Pointer to input image.
- * \param	width			Image width.
- * \param	height			Image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_stride		Output resized image row size in bytes.
+ * \param   src             Pointer to input image.
+ * \param   width           Image width.
+ * \param   height          Image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_stride      Output resized image row size in bytes.
  */
 bip_status bip_image_integral(uint8_t *src, size_t width, size_t height, size_t src_stride,
-				uint32_t *dst, size_t dst_stride);
+                uint32_t *dst, size_t dst_stride);
 
 /**
- * \brief Computes the squared sum integral of an image.
+ * \brief   Computes the squared sum integral of an image.
  *
- * \param	src				Pointer to input image.
- * \param	width			Image width.
- * \param	height			Image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_stride		Output resized image row size in bytes.
+ * \param   src             Pointer to input image.
+ * \param   width           Image width.
+ * \param   height          Image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_stride      Output resized image row size in bytes.
  */
 bip_status bip_image_square_integral(uint8_t *src, size_t width, size_t height, size_t src_stride,
-				uint32_t *dst, size_t dst_stride, double *dst_square, size_t dst_square_stride);
+                uint32_t *dst, size_t dst_stride, double *dst_square, size_t dst_square_stride);
 
 /**
- * \brief Computes a mean image using a sliding window.
+ * \brief   Computes a mean image using a sliding window.
  *
- * \param	src				Pointer to input image.
- * \param	width			Image width.
- * \param	height			Image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_stride		Output resized image row size in bytes.
- * \param	kernel_width	Sliding window width.
- * \param	kernel_height	Sliding window height.
+ * \param   src             Pointer to input image.
+ * \param   width           Image width.
+ * \param   height          Image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_stride      Output resized image row size in bytes.
+ * \param   kernel_width    Sliding window width.
+ * \param   kernel_height   Sliding window height.
  */
 bip_status bip_image_sliding_mean(uint8_t *src, size_t width, size_t height, size_t src_stride,
-			uint8_t *dst, size_t dst_stride, size_t kernel_width, size_t kernel_height);
+            uint8_t *dst, size_t dst_stride, size_t kernel_width, size_t kernel_height);
 
 /**
- * \brief Computes a mean image and a variance image using a sliding window.
+ * \brief   Computes a mean image and a variance image using a sliding window.
  *
- * \param	src				Pointer to input image.
- * \param	width			Image width.
- * \param	height			Image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_stride		Output resized image row size in bytes.
- * \param	kernel_width	Sliding window width.
- * \param	kernel_height	Sliding window height.
+ * \param   src             Pointer to input image.
+ * \param   width           Image width.
+ * \param   height          Image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_stride      Output resized image row size in bytes.
+ * \param   kernel_width    Sliding window width.
+ * \param   kernel_height   Sliding window height.
  */
 bip_status bip_image_sliding_mean_variance(uint8_t *src, size_t width, size_t height, size_t src_stride,
-			uint8_t *dst, size_t dst_stride, double *dst_variance, size_t dst_variance_stride,
-			size_t kernel_width, size_t kernel_height);
+            uint8_t *dst, size_t dst_stride, double *dst_variance, size_t dst_variance_stride,
+            size_t kernel_width, size_t kernel_height);
 
 /** 
- * \brief	Compute histogram of an image.
+ * \brief   Compute histogram of an image.
  *
- * \param	src				Pointer to input image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	histogram		Output computed histogram (allocated by user).
+ * \param   src             Pointer to input image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   histogram       Output computed histogram (allocated by user).
  */
 bip_status bip_image_histogram(uint8_t *src, size_t src_width, size_t src_height, size_t src_stride, uint32_t *histogram);
 
 /** 
- * \brief	Compute the Shannon entropy of an image.
+ * \brief   Compute the Shannon entropy of an image.
  *
- * \param	src				Pointer to input image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	entropy			Output entropy.
+ * \param   src             Pointer to input image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   entropy         Output entropy.
  */
 bip_status bip_image_entropy(uint8_t *src, size_t src_width, size_t src_height, size_t src_stride, float *entropy);
 
 /** 
- * \brief	Compute automatic threshold according to Otsu's method.
+ * \brief   Compute automatic threshold according to Otsu's method.
  *
- * \param	src				Pointer to input image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	thresh			Output otsu threshold.
- * \param	var				Output inter-class variance.
+ * \param   src             Pointer to input image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   thresh          Output otsu threshold.
+ * \param   var             Output inter-class variance.
  */
 bip_status bip_otsu(uint8_t *src, size_t src_width, size_t src_height, size_t src_stride, float *thresh, float *var);
 
 /**
- * \brief Resize an image with bilinear interpolation.
+ * \brief   Resize an image with bilinear interpolation.
  *
- * \param	src				Pointer to input image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_width		Output resized image width.
- * \param	dst_height		Output resized image height.
- * \param	dst_stride		Output resized image row size in bytes.
- * \param	depth			Image depth.
+ * \param   src             Pointer to input image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_width       Output resized image width.
+ * \param   dst_height      Output resized image height.
+ * \param   dst_stride      Output resized image row size in bytes.
+ * \param   depth           Image depth.
  */
 bip_status bip_resize_bilinear(uint8_t *src, size_t src_width, size_t src_height, size_t src_stride,
-				uint8_t *dst, size_t dst_width, size_t dst_height, size_t dst_stride, size_t depth);
+                uint8_t *dst, size_t dst_width, size_t dst_height, size_t dst_stride, size_t depth);
 
 /**
- * \brief Apply given rotation to an image.
+ * \brief   Apply given rotation to an image.
  *
- * \param	src				Pointer to input image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_width		Output resized image width.
- * \param	dst_height		Output resized image height.
- * \param	dst_stride		Output resized image row size in bytes.
- * \param	depth			Image depth.
- * \param	angle			Rotation angle.
- * \param	center_x		X-coord of the rotation center.
- * \param	center_y		Y-coord of the rotation center.
- * \param	interpolation	Interpolation method.
+ * \param   src             Pointer to input image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_width       Output resized image width.
+ * \param   dst_height      Output resized image height.
+ * \param   dst_stride      Output resized image row size in bytes.
+ * \param   depth           Image depth.
+ * \param   angle           Rotation angle.
+ * \param   center_x        X-coord of the rotation center.
+ * \param   center_y        Y-coord of the rotation center.
+ * \param   interpolation   Interpolation method.
  */
 bip_status bip_rotate_image(uint8_t *src, size_t src_width, size_t src_height, size_t src_stride,
-				uint8_t *dst, size_t dst_width, size_t dst_height, size_t dst_stride, size_t depth,
-				float angle, int32_t center_x, int32_t center_y, bip_interpolation interpolation);
+                uint8_t *dst, size_t dst_width, size_t dst_height, size_t dst_stride, size_t depth,
+                float angle, int32_t center_x, int32_t center_y, bip_interpolation interpolation);
 
 /**
- * \brief Apply gaussian blur using a 3x3 kernel.
+ * \brief   Apply gaussian blur using a 3x3 kernel.
  *
- * \param	src				Pointer to input image.
- * \param	width			Input image width.
- * \param	height			Input image height.
- * \param	depth			Image depth.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_stride		Output image row size in bytes.
+ * \param   src             Pointer to input image.
+ * \param   width           Input image width.
+ * \param   height          Input image height.
+ * \param   depth           Image depth.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_stride      Output image row size in bytes.
  */
 bip_status bip_gaussian_blur_3x3(uint8_t *src, size_t width, size_t height, size_t depth, size_t src_stride, uint8_t * dst, size_t dst_stride);
 
 /**
- * \brief Apply sobel filter and returns image of intensities of the gradients.
+ * \brief   Apply sobel filter and returns image of intensities of the gradients.
  *
- * \param	src				Pointer to input image.
- * \param	width			Input image width.
- * \param	height			Input image height.
- * \param	depth			Image depth.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image (must be float).
- * \param	dst_stride		Output image row size in bytes.
+ * \param   src             Pointer to input image.
+ * \param   width           Input image width.
+ * \param   height          Input image height.
+ * \param   depth           Image depth.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image (must be float).
+ * \param   dst_stride      Output image row size in bytes.
  */
 bip_status bip_sobel(uint8_t *src, size_t width, size_t height, size_t depth, size_t src_stride,
-				float *dst, size_t dst_stride);
+                float *dst, size_t dst_stride);
 
 /**
- * \brief Apply 3x3 median filter to image. Image must be grayscale.
+ * \brief   Apply 3x3 median filter to image. Image must be grayscale.
  *
- * \param	src				Pointer to input image.
- * \param	width			Input image width.
- * \param	height			Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_stride		Output image row size in bytes.
+ * \param   src             Pointer to input image.
+ * \param   width           Input image width.
+ * \param   height          Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_stride      Output image row size in bytes.
  */
 bip_status bip_median_3x3(uint8_t *src, size_t width, size_t height, size_t src_stride,
-				uint8_t * dst, size_t dst_stride);
+                uint8_t * dst, size_t dst_stride);
 
 /**
- * \brief Apply downsampling of a factor 2 then blurring with a 3x3 gaussian kernel to an image.
+ * \brief   Apply downsampling of a factor 2 then blurring with a 3x3 gaussian kernel to an image.
  *
- * \param	src				Pointer to input image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_width		Output image width.
- * \param	dst_height		Output image height.
- * \param	dst_stride		Output image row size in bytes.
+ * \param   src             Pointer to input image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_width       Output image width.
+ * \param   dst_height      Output image height.
+ * \param   dst_stride      Output image row size in bytes.
  */
 bip_status bip_pyramid_down(uint8_t *src, size_t src_width, size_t src_height, size_t src_stride,
-				uint8_t *dst, size_t dst_width, size_t dst_height, size_t dst_stride);
+                uint8_t *dst, size_t dst_width, size_t dst_height, size_t dst_stride);
 
 /**
- * \brief Apply upsampling of a factor 2 to an image.
+ * \brief   Apply upsampling of a factor 2 to an image.
  *
- * \param	src				Pointer to input image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
- * \param	dst_width		Output image width.
- * \param	dst_height		Output image height.
- * \param	dst_stride		Output image row size in bytes.
+ * \param   src             Pointer to input image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
+ * \param   dst_width       Output image width.
+ * \param   dst_height      Output image height.
+ * \param   dst_stride      Output image row size in bytes.
  */
 bip_status bip_pyramid_up(uint8_t *src, size_t src_width, size_t src_height, size_t src_stride,
-				uint8_t *dst, size_t dst_width, size_t dst_height, size_t dst_stride);
+                uint8_t *dst, size_t dst_width, size_t dst_height, size_t dst_stride);
 
 /**
-* \brief Invert image (negative).
+* \brief    Invert image (negative).
 *
-* \param	src				Pointer to input image.
-* \param	width			Image width.
-* \param	height			Image height.
-* \param	depth			Image depth.
-* \param	src_stride		Input image row size in bytes.
-* \param	dst				Pointer to output image.
+* \param    src             Pointer to input image.
+* \param    width           Image width.
+* \param    height          Image height.
+* \param    depth           Image depth.
+* \param    src_stride      Input image row size in bytes.
+* \param    dst             Pointer to output image.
 */
 bip_status bip_invert_image(uint8_t *src, size_t width, size_t height, size_t depth, size_t src_stride,
-				uint8_t *dst, size_t dst_stride);
+                uint8_t *dst, size_t dst_stride);
 
 /**
-* \brief Horizontal flip image.
+* \brief    Horizontal flip image.
 *
-* \param	src				Pointer to input image.
-* \param	width			Image width.
-* \param	height			Image height.
-* \param	depth			Image depth.
-* \param	src_stride		Input image row size in bytes.
-* \param	dst				Pointer to output image.
+* \param    src             Pointer to input image.
+* \param    width           Image width.
+* \param    height          Image height.
+* \param    depth           Image depth.
+* \param    src_stride      Input image row size in bytes.
+* \param    dst             Pointer to output image.
 */
 bip_status bip_fliph_image(uint8_t *src, size_t width, size_t height, size_t depth, size_t src_stride,
-	uint8_t *dst, size_t dst_stride);
+    uint8_t *dst, size_t dst_stride);
 
 /**
- * \brief Convert from unsigned char to float image.
+ * \brief   Convert from unsigned char to float image.
  *
- * \param	src				Pointer to input unsigned char image.
- * \param	width			Image width.
- * \param	height			Image height.
- * \param	depth			Image depth.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output image.
+ * \param   src             Pointer to input unsigned char image.
+ * \param   width           Image width.
+ * \param   height          Image height.
+ * \param   depth           Image depth.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output image.
  */
 bip_status bip_convert_u8_to_f32(uint8_t *src, size_t width, size_t height, size_t depth, size_t src_stride, float *dst);
 
 /**
- * \brief Enum of mapping types for LBP.
+ * \brief   Enum of mapping types for LBP.
  */
 typedef enum {
-	BIP_LBP_MAP_NONE,
-	BIP_LBP_MAP_UNIFORM
+    BIP_LBP_MAP_NONE,
+    BIP_LBP_MAP_UNIFORM
 } bip_lbp_mapping;
 
 /**
- * \brief Computes Local Binary Pattern (LBP) for an image.
+ * \brief   Computes Local Binary Pattern (LBP) for an image.
  *
- * \param	src				Pointer to input unsigned char image.
- * \param	width			Image width.
- * \param	height			Image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	dst				Pointer to output LBP image.
- * \param	dst_stride		Ouput LBP image row size in bytes.
+ * \param   src             Pointer to input unsigned char image.
+ * \param   width           Image width.
+ * \param   height          Image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   dst             Pointer to output LBP image.
+ * \param   dst_stride      Ouput LBP image row size in bytes.
  */
 bip_status bip_lbp_estimate(uint8_t * src, size_t width, size_t height, size_t src_stride, uint8_t * dst, size_t dst_stride);
 
 /**
- * \brief Computes the histogram feature vector from a LBP image using a specified mapping.
+ * \brief   Computes the histogram feature vector from a LBP image using a specified mapping.
  *
- * \param	src				Pointer to input LBP image.
- * \param	src_width		Input image width.
- * \param	src_height		Input image height.
- * \param	src_stride		Input image row size in bytes.
- * \param	feat			Pointer to output feature vector.
- * \param	norm			Flag wether to normalize or not the feature vector. If set to 0, no normalization.
- * \param	map				Type of mapping applied.
+ * \param   src             Pointer to input LBP image.
+ * \param   src_width       Input image width.
+ * \param   src_height      Input image height.
+ * \param   src_stride      Input image row size in bytes.
+ * \param   feat            Pointer to output feature vector.
+ * \param   norm            Flag wether to normalize or not the feature vector. If set to 0, no normalization.
+ * \param   map             Type of mapping applied.
  */
 bip_status bip_lbp_histogram_features(uint8_t *src, size_t src_width, size_t src_height, size_t src_stride,
-								float *feat, int32_t norm, bip_lbp_mapping map);
+                                float *feat, int32_t norm, bip_lbp_mapping map);
 
 
 #ifdef BIP_USE_STB_IMAGE
 /**
-* \brief Load image from file.
+* \brief    Load image from file.
 *
-* \param	filename			Image file path.
-* \param	src					Pointer to loaded image.
-* \param	src_width			Image width.
-* \param	src_height			Image height.
-* \param	src_depth			Image depth.
+* \param    filename            Image file path.
+* \param    src                 Pointer to loaded image.
+* \param    src_width           Image width.
+* \param    src_height          Image height.
+* \param    src_depth           Image depth.
 */
 bip_status bip_load_image(char *filename, uint8_t **src, int32_t *src_width, int32_t *src_height, int32_t *src_depth);
 
 /**
-* \brief Load image from memory.
-*
-* \param	buffer				Pointer to image buffer.
-* \param	buffer_size			Image buffer size.
-* \param	src					Pointer to loaded image.
-* \param	src_width			Image width.
-* \param	src_height			Image height.
-* \param	src_depth			Image depth.
+* \brief    Load image from memory.
+
+* \param    buffer              Pointer to image buffer.
+* \param    buffer_size         Image buffer size.
+* \param    src                 Pointer to loaded image.
+* \param    src_width           Image width.
+* \param    src_height          Image height.
+* \param    src_depth           Image depth.
 */
 bip_status bip_load_image_from_memory(unsigned char *buffer, int buffer_size, uint8_t **src, int32_t *src_width, int32_t *src_height, int32_t *src_depth);
 
 /**
-* \brief Write image on disk.
+* \brief    Write image on disk.
 *
-* \param	filename			Image file path.
-* \param	src					Pointer to image.
-* \param	src_width			Image width.
-* \param	src_height			Image height.
-* \param	src_depth			Image depth.
-* \param	src_stride			Image row size in bytes.
+* \param    filename            Image file path.
+* \param    src                 Pointer to image.
+* \param    src_width           Image width.
+* \param    src_height          Image height.
+* \param    src_depth           Image depth.
+* \param    src_stride          Image row size in bytes.
 */
 bip_status bip_write_image(char *filename, uint8_t *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride);
 
 /**
-* \brief Write image to memory buffer.
+* \brief    Write image to memory buffer.
 *
-* \param	buffer				Pointer to output buffer.
-* \param	buffer_size			Size of output buffer.
-* \param	src					Pointer to image.
-* \param	src_width			Image width.
-* \param	src_height			Image height.
-* \param	src_depth			Image depth.
-* \param	src_stride			Image row size in bytes.
+* \param    buffer              Pointer to output buffer.
+* \param    buffer_size         Size of output buffer.
+* \param    src                 Pointer to image.
+* \param    src_width           Image width.
+* \param    src_height          Image height.
+* \param    src_depth           Image depth.
+* \param    src_stride          Image row size in bytes.
 */
 bip_status bip_write_image_to_memory(unsigned char **buffer, int32_t *buffer_size,
-	uint8_t *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride);
+    uint8_t *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride);
 
 /**
 * \brief Write image (as a float array) on disk.
 *
-* \param	filename			Image file path.
-* \param	src					Pointer to image.
-* \param	src_width			Image width.
-* \param	src_height			Image height.
-* \param	src_depth			Image depth.
-* \param	src_stride			Image row size in bytes.
+* \param    filename            Image file path.
+* \param    src                 Pointer to image.
+* \param    src_width           Image width.
+* \param    src_height          Image height.
+* \param    src_depth           Image depth.
+* \param    src_stride          Image row size in bytes.
 */
 bip_status bip_write_float_image(char *filename, float *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride);
 
 bip_status bip_write_float_image_norm(char *filename, float *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride);
 
 /**
-* \brief Write image (as a double array) on disk.
+* \brief    Write image (as a double array) on disk.
 *
-* \param	filename			Image file path.
-* \param	src					Pointer to image.
-* \param	src_width			Image width.
-* \param	src_height			Image height.
-* \param	src_depth			Image depth.
-* \param	src_stride			Image row size in bytes.
+* \param    filename            Image file path.
+* \param    src                 Pointer to image.
+* \param    src_width           Image width.
+* \param    src_height          Image height.
+* \param    src_depth           Image depth.
+* \param    src_stride          Image row size in bytes.
 */
 bip_status bip_write_double_image(char *filename, double *src, int32_t src_width, int32_t src_height, int32_t src_depth, int32_t src_stride);
 #endif

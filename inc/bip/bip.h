@@ -33,6 +33,7 @@ extern "C" {
 #include <stdarg.h>
 #include <string.h>
 //#include <stdint.h>
+#include <stddef.h>
 #include <float.h>
 #include <math.h>
 #include <assert.h>
